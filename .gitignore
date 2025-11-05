@@ -1,0 +1,15 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.idea/
+.vscode/
+*.iml
+
+# Logs
+logs/
+*.log
+
+# Others
+.git/
