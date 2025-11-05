@@ -2,7 +2,8 @@ services:
   n8n:
     image: n8nio/n8n:latest
     container_name: n8n
-    restart: unless-stopped
+    entrypoint: ["/bin/sh", "/entrypoint.sh"]
+    user: root
     ports:
       - "5678:5678"
     environment:
@@ -39,17 +40,10 @@ services:
       N8N_PERSONALIZATION_ENABLED: "false"
       N8N_SECURE_COOKIE: "false"
 
-    user: "1000:1000"
     volumes:
+      - ./entrypoint.sh:/entrypoint.sh
       - ./n8n/data:${N8N_DATA_FOLDER:-/home/node/.n8n}
-
-    command: >
-      sh -c "
-        mkdir -p /home/node/.n8n/data /home/node/.n8n/config &&
-        chown -R node:node /home/node/.n8n &&
-        chmod -R 755 /home/node/.n8n &&
-        n8n start
-      "
+    restart: unless-stopped
 
 volumes:
-  postgres_data:
+  n8n:
