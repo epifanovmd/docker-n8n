@@ -35,15 +35,18 @@ services:
       N8N_DEFAULT_BINARY_DATA_MODE: filesystem
       N8N_DATA_FOLDER: ${N8N_DATA_FOLDER:-/home/node/.n8n}
 
+      # Исправление deprecated настроек
+      N8N_RUNNERS_ENABLED: "true"
+      N8N_BLOCK_ENV_ACCESS_IN_NODE: "false"
+      N8N_GIT_NODE_DISABLE_BARE_REPOS: "true"
+
       # Оптимизация
       N8N_DIAGNOSTICS_ENABLED: "false"
       N8N_PERSONALIZATION_ENABLED: "false"
-      N8N_SECURE_COOKIE: "false"
+      N8N_SECURE_COOKIE: "true"
+      N8N_PROXY_HOPS: "1"
 
     volumes:
       - ./entrypoint.sh:/entrypoint.sh
       - ./n8n/data:${N8N_DATA_FOLDER:-/home/node/.n8n}
     restart: unless-stopped
-
-volumes:
-  n8n:
